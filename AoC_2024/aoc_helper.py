@@ -2,9 +2,8 @@ from time import perf_counter
 from typing import Callable
 
 def load_input(day: str, test=False) -> str:
-    final_name = f"Day{day}_input.txt"
-    test_name = f"Day{day}_input_.txt"
-    file_name = test_name if test else final_name
+    file_name = f"Day{day}_input_.txt" if test else f"Day{day}_input.txt"
+
     with open(file_name) as fd:
         content = fd.read()
     return content
