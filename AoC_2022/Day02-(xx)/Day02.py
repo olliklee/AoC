@@ -1,10 +1,12 @@
 #  Solutions of Advent of Code
 #  Oliver Kleemann
 
-from time import perf_counter
+from AoC_2022.aoc_helper import run
 
 year, day = "2022", "02"
-
+final = f"Day{day}_input.txt"
+test = f"Day{day}_input_.txt"
+filename = final
 
 def prepare_input(file_name):
     with open(file_name) as f:
@@ -46,20 +48,6 @@ def solve_b():
     return total_score
 
 
-def run(d, y):
-    print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
+game = prepare_input(filename)
 
-    start = perf_counter()
-    print(f"Day {d} - Part 1: {solve_a()}")
-
-    lap = perf_counter()
-    print(f"Day {d} - Part 2: {solve_b()}")
-
-    stop = perf_counter()
-
-    print(f"\nPerformance\n{'-' * 30}")
-    print(f"Part 1: {(lap - start) * 100:.6f} ms\nPart 2: {(stop - lap)*100:.6f} ms")
-    print(f"{'-' * 30}\nGesamt: {(stop - start)*100:.6f} ms")
-
-
-run(day, year)
+run(day, year, solve_a, solve_b)

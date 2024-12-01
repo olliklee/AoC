@@ -1,16 +1,12 @@
 #  Solutions of Advent of Code
 #  Oliver Kleemann
 
-from time import perf_counter
+from AoC_2022.aoc_helper import run
 
 year, day = "2022", "03"
-
-test_input = """vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw"""
+final = f"Day{day}_input.txt"
+test = f"Day{day}_input_.txt"
+filename = final
 
 
 def prepare_input(file_name):
@@ -23,7 +19,6 @@ def prepare_input(file_name):
 
 
 def solve_a():
-    rucksacks = prepare_input(f"Day{day}_input.txt")
     score = 0
     # split bags in 2 compartments and find the common item
     for bag in rucksacks:
@@ -36,7 +31,6 @@ def solve_a():
 
 
 def solve_b():
-    rucksacks = prepare_input(f"Day{day}_input.txt")
     score = 0
 
     # split into teams of 3
@@ -51,21 +45,6 @@ def solve_b():
 
     return score
 
+rucksacks = prepare_input(filename)
 
-def run(d, y):
-    print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
-
-    start = perf_counter()
-    print(f"Day {d} - Part 1: {solve_a()}")
-
-    lap = perf_counter()
-    print(f"Day {d} - Part 2: {solve_b()}")
-
-    stop = perf_counter()
-
-    print(f"\nPerformance\n{'-' * 30}")
-    print(f"Part 1: {(lap - start) * 100:.6f} ms\nPart 2: {(stop - lap) * 100:.6f} ms")
-    print(f"{'-' * 30}\nGesamt: {(stop - start) * 100:.6f} ms")
-
-
-run(day, year)
+run(day, year, solve_a, solve_b)
