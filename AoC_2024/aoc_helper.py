@@ -8,7 +8,7 @@ def load_input(day: str, test=False) -> str:
         content = fd.read()
     return content
 
-
+#121
 def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[], int]):
     ''' call result formulas without () '''
     print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
