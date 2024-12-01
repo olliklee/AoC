@@ -1,16 +1,17 @@
 from time import perf_counter
+from typing import Callable
 
-
-def load_input(day, test=False):
+def load_input(day: str, test=False) -> str:
     final_name = f"Day{day}_input.txt"
     test_name = f"Day{day}_input_.txt"
-    filename = test_name if test else final_name
-    with open(filename) as fd:
+    file_name = test_name if test else final_name
+    with open(file_name) as fd:
         content = fd.read()
     return content
 
 
-def run_puzzles(d, y, result_a, result_b):
+def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[], int]):
+    ''' call result formulas without () '''
     print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
 
     start = perf_counter()
@@ -25,13 +26,3 @@ def run_puzzles(d, y, result_a, result_b):
     print(f"Part 1: {(lap - start) * 100:.6f} ms\nPart 2: {(stop - lap) * 100:.6f} ms")
     print(f"{'-' * 30}\nGesamt: {(stop - start) * 100:.6f} ms")
 
-
-def print_matrix(matrix):
-    for y in range(-12, 30):
-        display = f"{y:3} "
-        for x in range(-12, 30):
-            if (x, y) in matrix:
-                display += "#"
-            else:
-                display += "."
-        print(display)
