@@ -7,10 +7,6 @@ import re
 
 year, day = "2024", "01"
 
-def prepare_input(file_name):
-    with open(file_name) as f:
-        content = f.read()
-    return content
 
 def solve_a():
     return sum([abs(left_col[i] - right_col[i]) for i in range(len(left_col))])
