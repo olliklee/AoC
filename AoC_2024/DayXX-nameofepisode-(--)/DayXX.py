@@ -1,19 +1,9 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2024.aoc_helper import run_puzzles
+from AoC_2024.aoc_helper import *
 
 year, day = "YYYY", "XX"
-final = f"Day{day}_input.txt"
-test = f"Day{day}_input_.txt"
-filename = test              # change to final when ready
-
-
-def prepare_input():
-    with open(filename) as f:
-        content = f.read().split("\n")
-
-    return content
 
 
 def solve_a():
@@ -25,7 +15,9 @@ def solve_b():
     # code goes here
     return 0
 
+
 ### ----------- Start ------------- ###
 
-puzzle = prepare_input()
+puzzle = load_input(day, test=True)
+
 run_puzzles(day, year, solve_a, solve_b)

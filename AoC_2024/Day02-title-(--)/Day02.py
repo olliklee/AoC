@@ -1,30 +1,23 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-import re
-from AoC_2024.aoc_helper import run_puzzles
+from AoC_2024.aoc_helper import *
 
-year, day = "2024", "01"
-final = f"Day{day}_input.txt"
-test = f"Day{day}_input_.txt"
-filename = final
+year, day = "YYYY", "XX"
 
-def prepare_input(file_name):
-    with open(file_name) as f:
-        content = f.read()
-    return content
 
 def solve_a():
-    # code here
-
+    # code goes here
     return 0
+
 
 def solve_b():
-    # code here
+    # code goes here
     return 0
+
 
 ### ----------- Start ------------- ###
 
-puzzle = prepare_input(filename)
+puzzle = load_input(day, test=True)
 
 run_puzzles(day, year, solve_a, solve_b)
