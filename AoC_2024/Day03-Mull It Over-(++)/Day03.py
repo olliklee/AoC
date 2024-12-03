@@ -5,7 +5,7 @@ from aoc_helper import *
 import re
 
 year, day = "2024", "03"
- 
+
 def solve():
   puzzle = load_input(test=False)
 
@@ -46,6 +46,9 @@ def solved_by_gravitar():
     part2 += e
 
   return part1, part2
+
+
+### ----------- Start ------------- ###
 
 run_puzzle(day, year, solve)
 
