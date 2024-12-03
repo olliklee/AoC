@@ -2,14 +2,13 @@
 # # #  Oliver Kleemann
 
 from AoC_2024.aoc_helper import *
-
 import re
 
 year, day = "2024", "xx"
 
 
 def solve():
-    puzzle = load_input(day, test=True)
+    puzzle = load_input(test=True)
 
     result_a = 0
     result_b = 0
