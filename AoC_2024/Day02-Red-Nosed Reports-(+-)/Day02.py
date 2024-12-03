@@ -1,4 +1,4 @@
-# # #  Solutions of Advent of Code
+mir# # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
 from AoC_2024.aoc_helper import *
@@ -20,7 +20,7 @@ def solve():
         result_a += check(value_list)
         
         combis = combinations(value_list, len(value_list) - 1)
-        result_b += any(check(combis))
+        result_b += any(check(combi) for combi in combis)
         
     return result_a, result_b
 
