@@ -1,7 +1,7 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2024.aoc_helper import *
+from aoc_helper import *
 
 year, day = "2021", "02"
 

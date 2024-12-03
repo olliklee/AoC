@@ -1,7 +1,7 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2024.aoc_helper import *
+from aoc_helper import *
 
 import re
 
@@ -17,7 +17,7 @@ def solve_b():
 
 ### ----------- Start ------------- ###
 
-puzzle =  load_input(day, test=False)
+puzzle =  load_input(test=False)
 
 left_col = sorted(list(map(int, re.findall(r'^\d+', puzzle, re.MULTILINE))))
 right_col = sorted(list(map(int, re.findall(r'\d+$', puzzle, re.MULTILINE))))
