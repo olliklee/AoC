@@ -1,28 +1,42 @@
 from time import perf_counter
-from typing import Callable
+from typing import Callable, Tuple
 
-def load_input(day: str, test=False) -> str:
-    '''Read main input or test input from this folder.
-    It returns the file as string'''
-    file_name = f"Day{day}_input_.txt" if test else f"Day{day}_input.txt"
+def load_input(test=False) -> str:
+    """ Read main input or test input from this folder.It returns the file as string """
+    file_name = f"input_.txt" if test else f"input.txt"
 
     with open(file_name) as fd:
         content = fd.read()
     return content
 
 def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[], int]):
-    ''' call result formulas without () '''
-    print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
+    """ call result formulas without () """
+    start = perf_counter()
+    part_a = result_a()
+    lap = perf_counter()
+    part_b = result_b()
+    stop = perf_counter()
+    print(f'''
+    Results from AoC {y} - Day {d}
+    {'-' * 30}
+       Part 1: {part_a} ({(lap - start) * 100:.6f} ms)
+       Part 2: {part_b} ({(stop - lap) * 100:.6f} ms)
+    {'-' * 30}
+    Time complete: {(stop - start) * 100:.6f} ms
+    ''')
+
+def run_puzzle(d:str, y:str, result: Callable[[], Tuple[int, int]]) -> None:
+    ''' call result formula without () '''
 
     start = perf_counter()
-    print(f"Day {d} - Part 1: {result_a()}")
-
-    lap = perf_counter()
-    print(f"Day {d} - Part 2: {result_b()}")
-
+    part_a, part_b = result()
     stop = perf_counter()
 
-    print(f"\nPerformance\n{'-' * 30}")
-    print(f"Part 1: {(lap - start) * 100:.6f} ms\nPart 2: {(stop - lap) * 100:.6f} ms")
-    print(f"{'-' * 30}\nGesamt: {(stop - start) * 100:.6f} ms")
-
+    print(f'''
+    Results from AoC {y} - Day {d}
+    {'-' * 30}
+       Part 1: {part_a}
+       Part 2: {part_b}
+    {'-' * 30}
+    Time: {(stop - start) * 100:.6f} ms
+    ''')

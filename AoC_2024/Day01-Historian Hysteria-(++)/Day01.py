@@ -12,7 +12,7 @@ def solve_a():
     return sum([abs(left_col[i] - right_col[i]) for i in range(len(left_col))])
 
 def solve_b():
-    return sum([num * right_col.count(num) for num in left_col])
+    return sum([left_col[i] * right_col.count(left_col[i]) for i in range(len(left_col))])
 
 
 ### ----------- Start ------------- ###
