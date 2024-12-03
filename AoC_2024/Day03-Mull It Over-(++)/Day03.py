@@ -28,5 +28,26 @@ def solve():
       result_b += mul if do else 0
 
   return result_a, result_b
-  
+
+
+def solved_by_gravitar():
+  # damn that is so brillant
+  part1 = part2 = 0
+  p = load_input(test=False)
+
+  enabled = True
+  for dont, do, m1, m2 in re.findall(r'(don\'t\(\))|(do\(\))|mul\((\d+),(\d+)\)', p):
+    if dont or do:
+      enabled = do
+      continue
+    e = int(m1) * int(m2)
+    part1 += e
+    if not enabled: continue
+    part2 += e
+
+  return part1, part2
+
 run_puzzle(day, year, solve)
+
+print("From gravitar", end ='')
+run_puzzle(day, year, solved_by_gravitar)
