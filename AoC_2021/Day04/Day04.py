@@ -41,25 +41,18 @@ class Card:
         return sum([number for number in self.numbers if number < 500])
 
 
-def read_input_from_file():
-
+def read_input():
     return load_input().split('\n')
 
 
-def read_drawn_numbers(data_from_file):
-    drawn_numbers = data_from_file[0].split(",")
-    drawn_numbers_int = [int(number) for number in drawn_numbers]
-    del data_from_file[0:2]  # Lösche unrelevante Daten
+def read_drawn_numbers(data):
+    drawn_numbers_int = list(map(int,data[0].split(",")))
+    del data[0:2]  # Lösche unrelevante Daten
     return drawn_numbers_int
 
 
 def read_card_data(lines):
-    card_data = []
-    for line in lines:
-        if len(line) != 0:
-            splitted_line = line.split()
-            for number in splitted_line:
-                card_data.append(int(number))
+    card_data = [int(number) for line in lines if line.strip() for number in line.split()]
     return card_data
 
 
@@ -73,7 +66,7 @@ def create_cards(card_data):
 
 
 def solve_a():
-    data = read_input_from_file()
+    data = read_input()
     drawn_numbers = read_drawn_numbers(data)
     card_data = read_card_data(data)
     cards = create_cards(card_data)
@@ -87,7 +80,7 @@ def solve_a():
 
 
 def solve_b():
-    data = read_input_from_file()
+    data = read_input()
     drawn_numbers = read_drawn_numbers(data)
     card_data = read_card_data(data)
     cards = create_cards(card_data)
