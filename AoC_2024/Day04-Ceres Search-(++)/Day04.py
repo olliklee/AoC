@@ -29,35 +29,37 @@ def get_diagonals(text):
 
     return '\n'.join(diagonals)
 
+
 def check_surrounders(matrix, row, col):
-    positions = ((-1,-1),(-1,1),(1,-1),(1,1))
+    positions = ((-1, -1), (-1, 1), (1, -1), (1, 1))
     letters = ''.join([matrix[pos[0] + row][pos[1] + col] for pos in positions])
     return letters in ('MMSS', 'SSMM', 'SMSM', 'MSMS')
 
+
 def solve():
-    puzzle = load_input(test=False)
-    puzzle_a = puzzle[:]
-    puzzle_b = puzzle_a.split('\n')
+    puzzle1 = load_input(test=False)
+    puzzle2 = puzzle1.split('\n')
 
     # put all rows in any rotation into a long string with '.' as delimiter
     # and search for XMAS forward and backwards through the textline
-    full_text = ''
+    one_line = ''
     for _ in range(2):
-        full_text += puzzle_a.replace('\n', '.')+ "." + get_diagonals(text=puzzle_a).replace('\n', '.')
-        puzzle_a = turn(puzzle)
+        one_line += puzzle1.replace('\n', '.') + "." + get_diagonals(text=puzzle1).replace('\n', '.')
+        puzzle1 = turn(puzzle1)
 
-    matches = re.findall(r'XMAS',full_text) + re.findall(r'SAMX',full_text)
-    result_a = len(matches)
+    matches = re.findall(r'XMAS', one_line) + re.findall(r'SAMX', one_line)
+    part1 = len(matches)
 
     # go through the matrix without the outer rows and cols
     # check every field inside the boundaries, if it's an 'A' and the surrounders fit the pattern
-    result_b = 0
-    for row in range(1, len(puzzle_b) - 1):
-        for col in range(1, len(puzzle_b[0]) -1):
-            if puzzle_b[row][col] == 'A':
-                result_b += check_surrounders(puzzle_b, row, col) # True = 1
+    part2 = 0
+    for row in range(1, len(puzzle2) - 1):
+        for col in range(1, len(puzzle2[0]) - 1):
+            if puzzle2[row][col] == 'A':
+                part2 += check_surrounders(puzzle2, row, col)  # True = 1
 
-    return result_a, result_b
+    return part1, part2
+
 
 ### ----------- Start ------------- ###
 
