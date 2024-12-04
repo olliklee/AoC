@@ -44,7 +44,7 @@ def solve():
     full_text = ''
     for _ in range(2):
         full_text += puzzle1.replace('\n', '.')+ "." + get_diagonals(text=puzzle1).replace('\n', '.')
-        puzzle_a = turn(puzzle1)
+        puzzle1 = turn(puzzle1)
 
     matches = re.findall(r'XMAS',full_text) + re.findall(r'SAMX',full_text)
     part1 = len(matches)
