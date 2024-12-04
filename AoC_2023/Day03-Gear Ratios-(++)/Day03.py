@@ -1,20 +1,11 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2023.aoc_helpers import run_puzzles
+from aoc_helper import *
+
 from math import prod
 
 year, day = "2023", "03"
-final = f"Day{day}_input.txt"
-test = f"Day{day}_input_.txt"
-filename = final
-
-
-def prepare_input(file_name):
-    with open(file_name) as f:
-        content = f.read().split("\n")
-
-    return content
 
 
 def is_sign(char):
@@ -91,7 +82,7 @@ def solve_b():
     return result
 
 
-puzzle = prepare_input(filename)
+puzzle = load_input().split('\n')
 size_x, size_y = len(puzzle[0]), len(puzzle)
 
 run_puzzles(day, year, solve_a, solve_b)

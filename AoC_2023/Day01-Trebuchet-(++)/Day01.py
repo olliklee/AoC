@@ -1,12 +1,9 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2023.aoc_helpers import run_puzzles
+from aoc_helper import *
 
 year, day = "2023", "01"
-final = f"Day{day}_input.txt"
-test = f"Day{day}_input_.txt"
-filename = final
 
 int_dict = {"one": 1, "two": 2, "three": 3,
             "four": 4, "five": 5, "six": 6,
@@ -67,5 +64,5 @@ def solve_b():
     return sum_up
 
 
-puzzle = prepare_input(filename)
+puzzle = load_input().split('\n')
 run_puzzles(day, year, solve_a, solve_b)
