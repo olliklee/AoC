@@ -46,7 +46,7 @@ def best(initial_rng, maps):
     return best(initial_rng, maps[1:])
 
 # seeds, maps = parse(open("Day05_input_.txt").read())
-seeds, maps = parse(open("Day05_input.txt").read())
+seeds, maps = parse(open("input.txt").read())
 
 # part 1, just create a "range" for each seed. It works out the same
 sol1 = [(i, i) for i in seeds]

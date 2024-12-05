@@ -1,19 +1,13 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from AoC_2023.aoc_helpers import run_puzzles
-
+from aoc_helper import *
 from re import findall
 
 year, day = "2023", "05"
-final = f"Day{day}_input.txt"
-test = f"Day{day}_input_.txt"
-filename = test
-
 
 def prepare_input():
-    with open(filename) as f:
-        content = f.read().split("\n\n")
+    content = load_input(test= True).split("\n\n")
 
     seeds = list(map(int, findall("\d+", content[0])))
     maps = {block: list(map(int, findall("\d+", content[block]))) for block in range(1, len(content))}
@@ -40,7 +34,7 @@ def solve_a():
                 spot = translate_spot(spot, my_range)
 
         seed_spots.append(spot)
-    return min(seed_spots)
+    return min(seed_spots) # 382895070
 
 
 def solve_b():
@@ -50,7 +44,7 @@ def solve_b():
     for i in range(0, len(my_seeds), 2):
         start, amount = my_seeds[i], my_seeds[i + 1]
         new_seeds.append(range(start, start + amount))
-    print(new_seeds)
+    #print(new_seeds)
     # seed_spots = []
     # for seed in new_seeds:
     #     spot = seed
