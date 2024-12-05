@@ -9,7 +9,7 @@ year, day = "2024", "04"
 
 def turn(text):
     matrix = [list(line) for line in text.splitlines()]
-    rotated_matrix = [[row[i] for row in matrix[::-1]] for i in range(len(matrix[0]))]
+    rotated_matrix = list(zip(*matrix))
     rotated_text = '\n'.join(''.join(row) for row in rotated_matrix)
 
     return rotated_text
