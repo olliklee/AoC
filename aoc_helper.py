@@ -35,7 +35,7 @@ def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[]
     ''')
 
 
-def run_puzzle(d:str, y:str, result: Callable[[], Tuple[int, int]]) -> None:
+def run_puzzle(d:str, y:str, result) -> None:
     """ call result formula without () """
 
     start = perf_counter()
@@ -55,3 +55,6 @@ def run_puzzle(d:str, y:str, result: Callable[[], Tuple[int, int]]) -> None:
 def manhattan_distance(x1, y1, x2, y2):
     return abs(x1 - x2) + abs(y1 - y2)
 
+
+def clamp(value, min_value, max_value):
+    return max(min(value, max_value), min_value)
