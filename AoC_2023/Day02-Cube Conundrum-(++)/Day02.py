@@ -48,5 +48,5 @@ def solve_b():
     return id_sum
 
 
-puzzle = load_input().split('\n')
+puzzle = load_input(split_by_line=True)
 run_puzzles(day, year, solve_a, solve_b)

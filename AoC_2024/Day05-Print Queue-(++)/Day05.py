@@ -20,7 +20,7 @@ def bubble_sort(line, pairs):
     return line
 
 def solve():
-    puzzle = load_input(test=False, linewise=True)
+    puzzle = load_input(test=False, split_by_line=True)
 
     pairs = set()
     bad_lines = []

@@ -5,7 +5,7 @@ from aoc_helper import *
 year, day = "2021", "01"
 
 def solve():
-    zahlen = list(map(int, load_input().split('\n')))
+    zahlen = list(map(int, load_input(split_by_line=True)))
 
     result_a = result_b = 0
     index = 0

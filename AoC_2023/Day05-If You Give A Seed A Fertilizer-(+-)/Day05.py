@@ -7,7 +7,7 @@ from re import findall
 year, day = "2023", "05"
 
 def prepare_input():
-    content = load_input(test= True).split("\n\n")
+    content = load_input(test= True, delimiter="\n\n")
 
     seeds = list(map(int, findall("\d+", content[0])))
     maps = {block: list(map(int, findall("\d+", content[block]))) for block in range(1, len(content))}

@@ -12,7 +12,7 @@ def check(values):
 
 def solve():
     result_a = result_b = 0
-    puzzle = load_input(test=False, linewise=True)
+    puzzle = load_input(test=False, split_by_line=True)
 
     for line in puzzle:
         value_list = list(map(int, line.split()))

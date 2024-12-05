@@ -6,7 +6,7 @@ from aoc_helper import *
 year, day = "2021", "02"
 
 def solve():
-    lines = load_input().split('\n')
+    lines = load_input(split_by_line=True)
 
     direction = []
     amount = []

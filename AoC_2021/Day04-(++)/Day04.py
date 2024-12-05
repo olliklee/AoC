@@ -42,7 +42,7 @@ class Card:
 
 
 def read_input():
-    return load_input().split('\n')
+    return load_input(split_by_line=True)
 
 
 def read_drawn_numbers(data):

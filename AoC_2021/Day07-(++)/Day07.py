@@ -6,7 +6,7 @@ from aoc_helper import *
 year, day = "2021", "07"
 
 def solve():
-  riddles = list(map(int, load_input().split(',')))
+  riddles = list(map(int, load_input(delimiter=',')))
 
   fuels_a = []
   fuels_b = []
@@ -21,6 +21,7 @@ def solve():
 
       fuels_a.append(fuel_a)
       fuels_b.append(fuel_b)
+
 
   part_a = min(fuels_a)
   part_b = min(fuels_b)

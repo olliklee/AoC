@@ -46,12 +46,12 @@ def get_decimal(code):
 
 
 def solve():
-    puzzle1 = [word for line in load_input().split("\n") for word in line.strip().split("|")[1].split()]
+    puzzle1 = [word for line in load_input(split_by_line=True) for word in line.strip().split("|")[1].split()]
     possible_lengths = [2, 3, 4, 7]
     part1 = sum([True for code in puzzle1 if len(code) in possible_lengths])
 
     # Part 2
-    puzzle2 = [part.split() for line in load_input().split('\n') for part in line.strip().split("|")]
+    puzzle2 = [part.split() for line in load_input(split_by_line=True) for part in line.strip().split("|")]
     part2 = 0  # Endergebnis
     for index in range(0, len(puzzle2), 2):
         frontpart = puzzle2[index]

@@ -2,14 +2,18 @@ from time import perf_counter
 from typing import Callable, Tuple
 
 
-def load_input(test=False, linewise=False) -> str:
+def load_input(test=False, split_by_line=False, delimiter='') -> str:
     """ Read main input or test input from this folder.It returns the file as string """
 
     file_name = f"input_.txt" if test else f"input.txt"
-    with open(file_name) as fd:
-        content = fd.read()
+    split_character = '\n' if split_by_line and not delimiter else delimiter
+    try:
+        with open(file_name, 'r') as fd:
+            content = fd.read()
+    except FileNotFoundError:
+        print(f"File {file_name} not found.")
 
-    return content.splitlines() if linewise else content
+    return content.split(split_character) if split_character else content
 
 
 def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[], int]):

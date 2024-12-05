@@ -82,7 +82,7 @@ def solve_b():
     return result
 
 
-puzzle = load_input().split('\n')
+puzzle = load_input(split_by_line=True)
 size_x, size_y = len(puzzle[0]), len(puzzle)
 
 run_puzzles(day, year, solve_a, solve_b)

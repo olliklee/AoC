@@ -6,7 +6,7 @@ from aoc_helper import *
 year, day = "2021", "03"
 
 def solve():
-    binaries = load_input().split('\n')
+    binaries = load_input(split_by_line=True)
     binaries_orignal = binaries[:]
 
     gamma = epsilon = ""

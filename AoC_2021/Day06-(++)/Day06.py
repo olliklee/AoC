@@ -8,7 +8,7 @@ year, day = "2021", "06"
 
 
 def solve():
-    numbers = list(map(int, load_input().split(',')))
+    numbers = list(map(int, load_input(delimiter=',')))
 
     part_a = part_b = 0
     freq = {key: numbers.count(key) for key in range(9)}

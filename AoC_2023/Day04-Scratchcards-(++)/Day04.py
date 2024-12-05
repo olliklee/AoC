@@ -32,7 +32,7 @@ def solve():
 
     puzzle = {int(card.split(':')[0].split()[1]): \
                   (card.split(':')[1].split('|')[0].strip().split(),
-                   card.split('|')[1].strip().split()) for card in load_input().split('\n')}
+                   card.split('|')[1].strip().split()) for card in load_input(split_by_line=True)}
 
     part1 = sum(calculate_win(win_dict, puzzle, card_id) for card_id in puzzle.keys())
 
