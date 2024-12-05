@@ -50,3 +50,8 @@ def run_puzzle(d:str, y:str, result: Callable[[], Tuple[int, int]]) -> None:
     {'-' * 34}
       Time: {(stop - start) * 100:.6f} ms
     ''')
+
+
+def manhattan_distance(x1, y1, x2, y2):
+    return abs(x1 - x2) + abs(y1 - y2)
+
