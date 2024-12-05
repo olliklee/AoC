@@ -20,7 +20,7 @@ def bubble_sort(line, pairs):
     return line
 
 def solve():
-    puzzle = load_input(test=False).splitlines()
+    puzzle = load_input(test=False, linewise=True)
 
     pairs = set()
     bad_lines = []
@@ -33,13 +33,10 @@ def solve():
             pairs.add((int(l), int(r)))
         elif ',' in line:
             line = list(map(int, line.split(',')))
-            if is_valid(line, pairs):
-                good_lines.append(line)
-            else:
-                bad_lines.append(line)
+            (good_lines if is_valid(line, pairs) else bad_lines).append(line)
 
-    part1 = sum(line[int(len(line) / 2)] for line in good_lines)
-    part2 = sum([line[int(len(bubble_sort(line, pairs)) / 2)] for line in bad_lines])
+    part1 = sum(line[len(line) // 2] for line in good_lines)
+    part2 = sum([line[len(bubble_sort(line, pairs)) // 2] for line in bad_lines])
 
     return part1, part2
 
