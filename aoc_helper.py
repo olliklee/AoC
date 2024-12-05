@@ -23,26 +23,26 @@ def run_puzzles(d:str, y:str, result_a: Callable[[], int], result_b: Callable[[]
 
     print(f'''
       Results from AoC {y} - Day {d}
-    {'-' * 35}
-        Part 1: {part_a} ({(lap - start) * 100:.6f} ms)
-        Part 2: {part_b} ({(stop - lap) * 100:.6f} ms)
-    {'-' * 35}
+    {'-' * 34}
+      Part 1: {part_a} ({(lap - start) * 100:.6f} ms)
+      Part 2: {part_b} ({(stop - lap) * 100:.6f} ms)
+    {'-' * 34}
       Time complete: {(stop - start) * 100:.6f} ms
     ''')
 
 
 def run_puzzle(d:str, y:str, result: Callable[[], Tuple[int, int]]) -> None:
-    ''' call result formula without () '''
+    """ call result formula without () """
 
     start = perf_counter()
     part_a, part_b = result()
     stop = perf_counter()
 
     print(f'''
-    Results from AoC {y} - Day {d}
-    {'-' * 30}
-       Part 1: {part_a}
-       Part 2: {part_b}
-    {'-' * 30}
-    Time: {(stop - start) * 100:.6f} ms
+      Results from AoC {y} - Day {d}
+    {'-' * 34}
+      Part 1: {part_a}
+      Part 2: {part_b}
+    {'-' * 34}
+      Time: {(stop - start) * 100:.6f} ms
     ''')
