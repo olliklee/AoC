@@ -2,7 +2,6 @@
 # # #  Oliver Kleemann
 
 from aoc_helper import *
-import re
 
 year, day = "2024", "xx"
 
@@ -10,10 +9,10 @@ year, day = "2024", "xx"
 def solve():
     puzzle = load_input(test=True)
 
-    result_a = 0
-    result_b = 0
+    part1 = 0
+    part2 = 0
 
-    return result_a, result_b
+    return part1, part2
 
 
 ### ----------- Start ------------- ###
