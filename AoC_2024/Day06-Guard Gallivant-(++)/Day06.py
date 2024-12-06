@@ -8,16 +8,8 @@ year, day = "2024", "06"
 
 def find_start(maze):
     for y, line in enumerate(maze):
-        if '<' in line:
-            return line.index('<'), y, 270
         if '^' in line:
             return line.index('^'), y, 0
-        if '>' in line:
-            return line.index('>'), y, 90
-        if 'v' in line:
-            return line.index('V'), y, 180
-    # Wenn kein Startpunkt gefunden wird
-    return None
 
 
 def obstacle_ahead(maze, x, y, direction):
@@ -49,7 +41,7 @@ def solve():
     puzzle = [list(line) for line in load_input(test=False, split_by_line=True)]
     puzzle_origin = puzzle[:]
 
-    visited = set()
+    marked = set()
     start_x, start_y, direction = find_start(puzzle)
     x, y = start_x, start_y
 
@@ -60,13 +52,13 @@ def solve():
             direction = turn(direction)
 
         x, y = forward(x, y, direction)
-        visited.add((x, y))
+        marked.add((x, y))
 
     # part 2
     num_of_loops = 0
-    visited2 = dict()
+    walked_over = dict()
 
-    for key in visited:
+    for key in marked:
         # pass start field
         if key == (start_x, start_y):
             continue
@@ -74,7 +66,7 @@ def solve():
         # reset Maze
         x, y, direction = find_start(puzzle)
         puzzle = puzzle_origin
-        visited2.clear()
+        walked_over.clear()
 
         # set new obstacle
         new_obstacle = key
@@ -85,21 +77,21 @@ def solve():
                 direction = turn(direction)
 
             x, y = forward(x, y, direction)
-            if (x, y) in visited2:
-                if direction in visited2[(x, y)]:
+            if (x, y) in walked_over:
+                if direction in walked_over[(x, y)]:
                     num_of_loops += 1
                     if num_of_loops % 100 == 0:
                         print(20 * '\b' + 6 * ' ' + f'Found: {num_of_loops}', end='')
                     break
                 else:
-                    visited2[(x, y)].add(direction)
+                    walked_over[(x, y)].add(direction)
             else:
-                visited2[(x, y)] = {direction}
+                walked_over[(x, y)] = {direction}
 
         # delete new obstacle
         puzzle[new_obstacle[1]][new_obstacle[0]] = '.'
 
-    part1 = len(visited)
+    part1 = len(marked)
     part2 = num_of_loops
 
     return part1, part2
