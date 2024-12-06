@@ -58,3 +58,10 @@ def manhattan_distance(x1, y1, x2, y2):
 
 def clamp(value, min_value, max_value):
     return max(min(value, max_value), min_value)
+
+
+def print_matrix(matrix):
+    print()
+    for row in matrix:
+        print(" ".join(f"{val: 2}" for val in row))  # :2 für einheitliche Spaltenbreite
+    print()
