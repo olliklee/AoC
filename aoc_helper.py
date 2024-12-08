@@ -61,7 +61,21 @@ def clamp(value, min_value, max_value):
 
 
 def print_matrix(matrix):
-    print()
-    for row in matrix:
-        print(" ".join(f"{val: 2}" for val in row))  # :2 für einheitliche Spaltenbreite
-    print()
+    if type(matrix) is dict:
+        max_x = max(key[0] for key in matrix.keys())
+        max_y = max(key[1] for key in matrix.keys())
+
+        # Drucke das Gitter basierend auf den Koordinaten
+        for x in range(max_x + 1):
+            for y in range(max_y + 1):
+                # Überprüfe, ob die Koordinate im Dictionary existiert
+                if (x, y) in matrix:
+                    print(matrix[(x, y)], end=" ")
+                else:
+                    print(".", end=" ")  # Leere Felder mit einem Punkt füllen
+            print()  # Neue Zeile für das nächste x
+        print()
+    elif type(matrix) is list:
+        for row in matrix:
+            print(" ".join(f"{val: 2}" for val in row))  # :2 für einheitliche Spaltenbreite
+        print()
