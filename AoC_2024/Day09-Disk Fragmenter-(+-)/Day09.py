@@ -1,5 +1,6 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
+from calendar import firstweekday
 
 from aoc_helper import *
 from collections import defaultdict
@@ -33,11 +34,58 @@ def compress1(storage):
             fillers -= 1
     return new_storage
 
+def compress2(storage):
+    new_storage = []
+    moved = []
+    free = {key: int(file[1])  for key, file in storage.items()}# when a block is moved to begin, the id is copied here
+
+    max_id = len(storage) - 1
+    f_pointer, b_pointer = 0, max_id
+
+    new_storage.extend([f_pointer] * storage[0][0])
+    while free:
+        print(new_storage)
+        gap = free[f_pointer]
+        if b_pointer in moved:
+            b_pointer -= 1
+            continue
+        while True:
+            size = storage[b_pointer][0]
+            if size < gap:
+                new_storage.extend(size * [b_pointer])
+                free[f_pointer] -= size
+                moved.append(b_pointer)
+                break
+            elif size == gap:
+                new_storage.extend(size * [b_pointer])
+                moved.append(b_pointer)
+                del free[f_pointer]
+                f_pointer += 1
+                b_pointer = max_id
+
+                break
+            else:
+                b_pointer -= 1
+                if b_pointer <= f_pointer:
+                    new_storage.extend(size * '.')
+                    f_pointer += 1
+                    b_pointer = max_id
+                    break
+
+def compress3(storage):
+    liste = []
+    new_storage = [item for k, v in storage.items() for item in ([k] * v[0] + v[1] * ["."])]
+    last = new_storage[-1]
+    while True:
+        for i in range(1, len(new_storage)):
+        last = new_storage[-1]
+        if last
+
+
+    return new_storage
 
 def solve():
-    part2 = 0
-
-    puzzle = list(map(int, list(load_input(test=False))))
+    puzzle = list(map(int, list(load_input(test=True))))
 
     storage = defaultdict(tuple)
     file_id = 0
@@ -46,10 +94,13 @@ def solve():
         file_id += 1
     storage[file_id] = (puzzle[-1], 0)
 
-    part1 = sum([i * int(file_id) for i, file_id in enumerate(compress1(storage))])
-    part2 = 0
 
-    return part1, part2
+
+
+    # part1 = sum([i * int(file_id) for i, file_id in enumerate(compress1(storage))])
+    # part2 = sum([i * int(file_id) for i, file_id in enumerate(compress2(storage)) if file_id != '.'])
+    print(compress3(storage))
+    return 0,0
 
 
 ### ----------- Start ------------- ###
