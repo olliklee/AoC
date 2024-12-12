@@ -13,12 +13,10 @@ def get_plant(puzzle, position):
     return puzzle[(position[1], position[0])]
 
 def get_area(puzzle, pos, plant, inside):
-    if pos not in puzzle:
-        return
+    if pos not in puzzle: return
 
     p = get_plant(puzzle, pos)
-    if p != plant or pos in inside:
-        return
+    if p != plant or pos in inside: return
 
     inside.append(pos)
 
@@ -37,26 +35,23 @@ def count_walls(area):
 
 
 def solve():
-    puzzle = load_input(test=True, split_by_line=True)
+    puzzle = load_input(test=False, split_by_line=True)
     garden = {(x,y): puzzle[x][y] for y in range(len(puzzle[0])) for x in range(len(puzzle))}
     plants = {garden[pos] for pos in garden}
 
     part1 = part2 = 0
 
-    for plant in plants:
-        area = []
-        first_pos = ()
-        for pos in garden:
-            if get_plant(garden, pos) == plant:
-                first_pos = pos
-                break
+    visited = set()
+    for pos in garden:
+        if pos in visited: continue
 
-        get_area(garden, first_pos, plant, area)
+        area = []
+        plant = get_plant(garden, pos)
+        get_area(garden, pos, plant, area)
+        visited.update(area)
 
         size = len(area)
         walls = count_walls(area)
-
-        print(plant, size, walls)
 
         part1 += size * walls
 
