@@ -23,19 +23,56 @@ def get_area(puzzle, pos, plant, inside):
     for n in get_neighbours(pos):
         get_area(puzzle, n, p, inside)
 
-def count_walls(area):
-    wall_count = 0
+def get_walls(area):
+    # wall_count = 0
+    walls = []
     for pos in area:
-        walls = set()
+        # walls.clear()
         for n in get_neighbours(pos):
             if n not in area:
-                walls.add(n)
-        wall_count += len(walls)
-    return wall_count
+                walls.append(n)
+        # wall_count += len(walls)
+
+
+    return len(walls), walls
+
+def sort_connected_fields(walls):
+    if not walls:
+        return []
+
+    # Wandle die Liste in ein Set für schnelleren Zugriff
+    fields_set = set(walls)
+    sorted_fields = []
+
+    # Wähle den Startpunkt (kleinste x, y)
+    pos = min(walls)
+    sorted_fields.append(pos)
+
+    fields_set.remove(pos)
+
+    # Iterativ die Nachbarn finden
+    while fields_set:
+        x, y = pos
+        # Potenzielle Nachbarn berechnen
+        neighbours = [
+            (x+1, y),  # rechts
+            (x-1, y),  # links
+            (x, y+1),  # oben
+            (x, y-1)   # unten
+        ]
+        # Nachbarn durchsuchen, die noch in `fields_set` sind
+        for n in neighbours:
+            if n in fields_set:
+                pos = n
+                sorted_fields.append(pos)
+                fields_set.remove(pos)
+                break
+
+    return sorted_fields
 
 
 def solve():
-    puzzle = load_input(test=False, split_by_line=True)
+    puzzle = load_input(test=True, split_by_line=True)
     garden = {(x,y): puzzle[x][y] for y in range(len(puzzle[0])) for x in range(len(puzzle))}
     plants = {garden[pos] for pos in garden}
 
@@ -51,9 +88,9 @@ def solve():
         visited.update(area)
 
         size = len(area)
-        walls = count_walls(area)
-
-        part1 += size * walls
+        walls_count, walls = get_walls(area)
+        print(plant, calc_discount(walls))
+        part1 += size * walls_count
 
     return part1, part2
 
