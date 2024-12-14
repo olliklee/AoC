@@ -77,5 +77,5 @@ def print_matrix(matrix):
         print()
     elif type(matrix) is list:
         for row in matrix:
-            print(" ".join(f"{val: 2}" for val in row))  # :2 für einheitliche Spaltenbreite
+            print(" ".join(val for val in row))  # :2 für einheitliche Spaltenbreite
         print()
