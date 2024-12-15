@@ -80,3 +80,20 @@ def print_matrix(matrix):
     for row in matrix:
       print(" ".join(f"{val: 2}" for val in row))  # :2 für einheitliche Spaltenbreite
     print()
+
+
+def convert_to_dict_map(map_as_string: str) -> dict:
+  """
+    Converts a multi-line ASCII map (given as a string) into a dictionary representation.
+
+    Each character in the ASCII map is mapped to a coordinate (x, y), where:
+      - `x` represents the horizontal position (column, starting at 0),
+      - `y` represents the vertical position (row, starting at 0).
+
+    The resulting dictionary uses:
+      - Keys: Tuples `(x, y)` indicating the position in the grid.
+      - Values: Characters from the ASCII map at the corresponding positions.
+    """
+  
+  new_map = map_as_string.split("\n")
+  return {(x, y): new_map[y][x] for y in range(len(new_map)) for x in range(len(new_map[y]))}
