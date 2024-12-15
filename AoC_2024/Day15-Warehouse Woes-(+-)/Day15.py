@@ -58,8 +58,7 @@ def solve():
   part1 = part2 = 0
   
   room, moves = load_input(test=False).split('\n\n')
-  room = room.split('\n')
-  room = {(x, y): room[y][x] for y in range(len(room)) for x in range(len(room[y]))}
+  room = convert_to_dict_map(room)
   
   robot = next((k for k, v in room.items() if v == '@')) # find the robot
   moves = moves.replace('\n', '')

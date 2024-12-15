@@ -72,8 +72,8 @@ def sort_connected_fields(walls):
 
 
 def solve():
-    puzzle = load_input(test=True, split_by_line=True)
-    garden = {(x,y): puzzle[x][y] for y in range(len(puzzle[0])) for x in range(len(puzzle))}
+    puzzle = load_input(test=True)
+    garden = convert_to_dict_map(puzzle)
     plants = {garden[pos] for pos in garden}
 
     part1 = part2 = 0
