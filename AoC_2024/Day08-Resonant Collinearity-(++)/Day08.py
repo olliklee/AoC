@@ -31,8 +31,8 @@ def get_all_antipodes(point_a, point_b, grid):
 
 
 def solve():
-  content = load_input(test=False, split_by_line=True)
-  puzzle = {(x, y): content[x][y] for y in range(len(content[0])) for x in range(len(content))}
+  content = load_input(test=True, split_by_line=True)
+  puzzle = {(x, y): content[y][x] for y in range(len(content[0])) for x in range(len(content))}
   
   antennas = defaultdict(list)
   for spot in puzzle:
