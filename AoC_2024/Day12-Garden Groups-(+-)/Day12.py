@@ -89,7 +89,7 @@ def solve():
 
         size = len(area)
         walls_count, walls = get_walls(area)
-        print(plant, calc_discount(walls))
+        
         part1 += size * walls_count
 
     return part1, part2
