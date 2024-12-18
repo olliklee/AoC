@@ -53,21 +53,9 @@ def solve():
   while pointer < len(program)-1:
     com, op = program[pointer], program[pointer + 1]
     registers, pointer = parse(com, op, registers, pointer, output)
-  part1 = ','.join(output)
   
-  new_code = []
-  reg_a = 66171486
-  while new_code != program:
-    reg_a += 1
-    output = []
-    pointer = 0
-    while pointer < len(program) - 1:
-      com, op = program[pointer], program[pointer + 1]
-      registers, pointer = parse(com, op, (reg_a, 0, 0), pointer, output)
-    print(output)
-    
-    print('\b\b\b\b\b\b\b\b' + str(reg_a), end='')
-  print(registers)
+  part1 = ','.join(output)
+
   
   
   return part1, part2
