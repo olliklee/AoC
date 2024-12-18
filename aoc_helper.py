@@ -1,5 +1,6 @@
 from time import perf_counter
 from typing import Callable, Tuple
+import heapq
 
 
 def load_input(test=False, split_by_line=False, delimiter='') -> str:
@@ -97,3 +98,52 @@ def convert_to_dict_map(map_as_string: str) -> dict:
   
   new_map = map_as_string.split("\n")
   return {(x, y): new_map[y][x] for y in range(len(new_map)) for x in range(len(new_map[y]))}
+  
+  
+def dijkstra_map(map_data, start, goal):
+  """
+  Findet den kürzesten Pfad auf einer Karte von einem Start- zu einem Zielpunkt.
+
+  Parameters:
+      map_data (dict): Ein Dictionary mit Positionen (x, y) als Schlüssel und '.' oder '#' als Wert.
+      start (tuple): Startposition als (x, y).
+      goal (tuple): Zielposition als (x, y).
+
+  Returns:
+      list: Der kürzeste Pfad als Liste von (x, y)-Positionen, oder [] wenn kein Pfad gefunden wird.
+  """
+  directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Nachbarpositionen (rechts, unten, links, oben)
+  
+  priority_queue = []
+  heapq.heappush(priority_queue, (0, start, [start]))
+  
+  distances = {pos: float('inf') for pos in map_data}
+  distances[start] = 0
+  visited = set()  # Besuchte Felder
+  while priority_queue:
+    current_distance, current_pos, path = heapq.heappop(priority_queue)
+    if current_pos in visited:
+      continue
+    visited.add(current_pos)
+    
+    # Ziel erreicht
+    if current_pos == goal:
+      return path
+    
+    # Nachbarn erkunden
+    for dx, dy in directions:
+      neighbor = (current_pos[0] + dx, current_pos[1] + dy)
+      
+      # Überspringen, wenn Nachbar außerhalb der Karte oder blockiert ist
+      if neighbor not in map_data or map_data[neighbor] == '#':
+        continue
+      
+      # Neue Distanz berechnen
+      new_distance = current_distance + 1
+      
+      if new_distance < distances[neighbor]:
+        distances[neighbor] = new_distance
+        heapq.heappush(priority_queue, (new_distance, neighbor, path + [neighbor]))
+  
+  # Kein Pfad gefunden
+  return []
