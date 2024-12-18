@@ -69,7 +69,6 @@ def print_matrix(matrix):
     # Drucke das Gitter basierend auf den Koordinaten
     for y in range(max_y + 1):
       for x in range(max_x + 1):
-        # Überprüfe, ob die Koordinate im Dictionary existiert
         if (x, y) in matrix:
           print(matrix[(x, y)], end=" ")
         else:
