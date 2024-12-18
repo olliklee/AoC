@@ -65,7 +65,7 @@ def solve_b():
     return 0
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input()
 maze = [[pipes[sign][1] for sign in line] for line in puzzle]

@@ -46,7 +46,7 @@ def solve_b():
                for lensnr, foc in enumerate(lense.values(), start=1))
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input()
 

@@ -61,7 +61,7 @@ def solve_b():
     # return min(seed_spots)
     return 0
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 my_seeds, my_maps = prepare_input()
 run_puzzles(day, year, solve_a, solve_b)

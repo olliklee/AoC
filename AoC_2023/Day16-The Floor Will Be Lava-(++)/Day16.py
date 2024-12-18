@@ -141,7 +141,7 @@ def solve_b():
     return max_energized
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input()
 

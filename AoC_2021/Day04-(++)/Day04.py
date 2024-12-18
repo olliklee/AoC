@@ -100,6 +100,6 @@ def solve_b():
     return last_win_card.lucky_number_when_bingo * last_win_card.get_sum_of_unmarked_fields()
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 run_puzzles(day, year, solve_a, solve_b)

@@ -116,6 +116,6 @@ def solve():
     return part_a, part_b
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 run_puzzle(day, year, solve)

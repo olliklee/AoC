@@ -54,7 +54,7 @@ def solve_b() -> str:  # or int
     return "not solved"
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input(filename)
 run_puzzles(day, year, solve_a, solve_b)

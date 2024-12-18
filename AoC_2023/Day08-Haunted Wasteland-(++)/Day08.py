@@ -54,7 +54,7 @@ def solve_b() -> int:
     return lcm(*step_list) # lowest common multiplicator
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 commands, maps = prepare_input()
 run_puzzles(day, year, solve_a, solve_b)

@@ -27,6 +27,6 @@ def solve():
     return result_a, result_b
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 run_puzzle(year, day, solve)
