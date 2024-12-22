@@ -38,12 +38,8 @@ def add_sequences(num, digits):
         if seq not in local_dict.keys():
             local_dict[seq] = digits[i + 4]
 
-    for seq in local_dict.keys():
-        if seq not in seq_dict.keys():
-            seq_dict[seq] = [local_dict[seq]]
-        else:
-            seq_dict[seq].append(local_dict[seq])
-
+    for seq, value in local_dict.items():
+        seq_dict[seq].append(value)
 
 def solve():
     part1 = part2 = 0
