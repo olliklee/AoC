@@ -11,9 +11,9 @@ year, day = "2022", "05"
 
 def move(stacks, order, crane_type):
     amount, f, t = order
-    
+
     # lifts crates from stack
-    crates_taken = stacks[f-1][-amount:]
+    crates_taken = stacks[f - 1][-amount:]
     stacks[f - 1] = stacks[f - 1][:-amount]
 
     if crane_type == "9000":
@@ -35,12 +35,12 @@ def init_stacks(crates):
                 stacks[i].append(char)
     return [col[::-1] for col in stacks]
 
+
 def solve():
     part1 = part2 = 0
     crates, commands = load_input(test=False, delimiter='\n\n')
     orders = [tuple(map(int, match)) for match in re.findall(r'(\d+) from (\d) to (\d)', commands, re.MULTILINE)]
     crates = crates.splitlines()
-
 
     # part1
     stacks = init_stacks(crates)
@@ -53,8 +53,10 @@ def solve():
     for order in orders:
         move(stacks, order, crane_type="9001")
     part2 = "".join([col[-1] for col in stacks])
-    
+
     return part1, part2
 
+
+#  ----------   Start   ----------   #
 
 run_puzzle(day, year, solve)
