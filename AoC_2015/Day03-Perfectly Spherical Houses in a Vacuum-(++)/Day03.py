@@ -18,10 +18,10 @@ def get_new_pos(pos, direction):
 def solve():
     puzzle = load_input()
     
-    houses = defaultdict(int)
+    houses = set()
     pos = (0, 0)
     for direction in puzzle:
-        houses[pos] += 1
+        houses.add(pos)
         pos = get_new_pos(pos, direction)
     part1 = len(houses)
     
@@ -29,10 +29,10 @@ def solve():
     pos, rpos = (0, 0), (0, 0)
     for i, direction in enumerate(puzzle):
         if i % 2 == 0:
-            houses[pos] += 1
+            houses.add(pos)
             pos = get_new_pos(pos, direction)
         else:
-            houses[rpos] += 1
+            houses.add(rpos)
             rpos = get_new_pos(rpos, direction)
     part2 = len(houses)
     
