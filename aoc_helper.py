@@ -15,6 +15,8 @@ def load_input(test=False, split_by_line=False, delimiter='') -> str:
             content = fd.read()
     except FileNotFoundError:
         print(f"File {file_name} not found.")
+    if not content:
+        raise Exception('Empty input file.')
 
     return content.split(split_character) if split_character else content
 
