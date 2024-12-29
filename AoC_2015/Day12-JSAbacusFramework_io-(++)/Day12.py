@@ -52,6 +52,7 @@ def solve():
     decoder = json.JSONDecoder()
     my_json = decoder.decode(puzzle)
     global result
+
     result = 0
     analyze_json_a(my_json)
     part1 = result
@@ -66,14 +67,3 @@ def solve():
 #  ----------   Start   ----------   #
 
 run_puzzle(day, year, solve)
-
-#
-# def solution_b():
-#     global result
-#     result = 0
-#     analyze_json_b(my_json)
-#     return result
-#
-#
-# print(f'{year}/{day}a: {solution_a()}')
-# print(f'{year}/{day}b: {solution_b()}')
