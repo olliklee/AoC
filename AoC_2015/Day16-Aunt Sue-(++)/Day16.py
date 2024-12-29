@@ -48,18 +48,19 @@ def get_encabulated_dict(my_dict, known_dict, my_key):
 def solve():
     part1 = part2 = 0
     puzzle = (load_input()
-              .replace(":","")
+              .replace(":", "")
               .replace(",", "").split('\n'))
+
+    aunties_dict = {}
+    for line in puzzle:
+        line = line.split(" ")
+        aunties_dict[int(line[1])] = {line[2]: int(line[3]), line[4]: int(line[5]), line[6]: int(line[7])}
 
     known_dict = {'children': 3, 'cats': 7,
                   'samoyeds': 2, 'pomeranians': 3,
                   'akitas': 0, 'vizslas': 0,
                   'goldfish': 5, 'trees': 3,
                   'cars': 2, 'perfumes': 1}
-    aunties_dict = {}
-    for line in puzzle:
-        line = line.split(" ")
-        aunties_dict[int(line[1])] = {line[2]: int(line[3]), line[4]: int(line[5]), line[6]: int(line[7])}
 
     filtered_aunties = aunties_dict
     for key in known_dict.keys():
