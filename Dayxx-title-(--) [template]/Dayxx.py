@@ -3,14 +3,14 @@
 
 from aoc_helper import *
 
-year, day = "20xx", "xx"
+year, day = "2024", "xx"
 
 
 def solve():
-    part1 = part2 = 0
     puzzle = load_input(test=True)
 
-    part1 = part2 = 0
+    part1 = 0
+    part2 = 0
 
     return part1, part2
 
