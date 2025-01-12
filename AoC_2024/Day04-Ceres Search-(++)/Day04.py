@@ -35,6 +35,7 @@ def check_surrounders(matrix, row, col) -> bool:
     letters = ''.join([matrix[pos[0] + row][pos[1] + col] for pos in positions])
     return letters in ('MMSS', 'SSMM', 'SMSM', 'MSMS')
 
+
 def solve():
     puzzle1 = load_input(test=False)
     puzzle2 = puzzle1.split('\n')
@@ -43,21 +44,22 @@ def solve():
     # and search for XMAS forward and backwards through the textline
     full_text = ''
     for _ in range(2):
-        full_text += puzzle1.replace('\n', '.')+ "." + get_diagonals(text=puzzle1).replace('\n', '.')
+        full_text += puzzle1.replace('\n', '.') + "." + get_diagonals(text=puzzle1).replace('\n', '.')
         puzzle1 = turn(puzzle1)
 
-    matches = re.findall(r'XMAS',full_text) + re.findall(r'SAMX',full_text)
+    matches = re.findall(r'XMAS', full_text) + re.findall(r'SAMX', full_text)
     part1 = len(matches)
 
     # go through the matrix without the outer rows and cols
     # check every field inside the boundaries, if it's an 'A' and the surrounders fit the pattern
     part2 = 0
     for row in range(1, len(puzzle2) - 1):
-        for col in range(1, len(puzzle2[0]) -1):
+        for col in range(1, len(puzzle2[0]) - 1):
             if puzzle2[row][col] == 'A':
-                part2 += check_surrounders(puzzle2, row, col) # True = 1
+                part2 += check_surrounders(puzzle2, row, col)  # True = 1
 
     return part1, part2
+
 
 #  ----------   Start   ----------   #
 
