@@ -10,8 +10,6 @@ def solve():
     part1 = part2 = 0
     puzzle = load_input(test=True)
 
-    part1 = part2 = 0
-
     return part1, part2
 
 
