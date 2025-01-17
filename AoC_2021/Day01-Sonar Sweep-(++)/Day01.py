@@ -29,4 +29,4 @@ def solve():
 
 #  ----------   Start   ----------   #
 
-run_puzzle(year, day, solve)
+run_puzzle(day, year, solve)

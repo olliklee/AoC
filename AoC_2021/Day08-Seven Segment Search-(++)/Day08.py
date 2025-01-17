@@ -4,7 +4,7 @@
 from aoc_helper import *
 from random import sample
 
-year, day = "2021", "07"
+year, day = "2021", "08"
 
 
 def read_input_from_file_b(file_name):

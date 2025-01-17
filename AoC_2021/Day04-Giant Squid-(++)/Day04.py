@@ -3,7 +3,7 @@
 
 from aoc_helper import *
 
-year, day = "2021", "03"
+year, day = "2021", "04"
 
 class Card:
     def __init__(self):
