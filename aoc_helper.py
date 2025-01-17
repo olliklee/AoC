@@ -6,7 +6,7 @@ T = TypeVar("T", int, float, str)
 
 DIVIDER = '-' * 41
 DAY = lambda d: d[1:] if d[0] == '0' else d
-HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}\n'
+HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}'
 
 
 
@@ -43,7 +43,6 @@ def run_puzzles(d: str, y: str, result_a: Callable[[], int], result_b: Callable[
       Part 2: {part_b} ({(stop - lap) * 100:.6f} ms)
     {DIVIDER}
       Time complete: {(stop - start) * 100:.6f} ms
-      ->  https://adventofcode.com/{y}/day/{d}
     ''')
 
 
