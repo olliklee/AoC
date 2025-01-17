@@ -5,7 +5,8 @@ import heapq
 T = TypeVar("T", int, float, str)
 
 DIVIDER = '-' * 41
-HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{d}'
+DAY = lambda d: d[1:] if d[0] == '0' else d
+HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}\n'
 
 
 
