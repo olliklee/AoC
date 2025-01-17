@@ -4,6 +4,10 @@ import heapq
 
 T = TypeVar("T", int, float, str)
 
+DIVIDER = '-' * 41
+HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{d}'
+
+
 
 def load_input(test=False, split_by_line=False, delimiter='') -> str:
     """ Read main input or test input from this folder.It returns the file as string """
@@ -31,12 +35,14 @@ def run_puzzles(d: str, y: str, result_a: Callable[[], int], result_b: Callable[
     stop = perf_counter()
 
     print(f'''
-      Results from AoC {y} - Day {d}
-    {'-' * 34}
+    {DIVIDER}
+      {HEADER(y, d)}
+    {DIVIDER}
       Part 1: {part_a} ({(lap - start) * 100:.6f} ms)
       Part 2: {part_b} ({(stop - lap) * 100:.6f} ms)
-    {'-' * 34}
+    {DIVIDER}
       Time complete: {(stop - start) * 100:.6f} ms
+      ->  https://adventofcode.com/{y}/day/{d}
     ''')
 
 
@@ -48,11 +54,12 @@ def run_puzzle(d: str, y: str, result) -> None:
     stop = perf_counter()
 
     print(f'''
-      Results from AoC {y} - Day {d}
-    {'-' * 34}
+    {DIVIDER}
+      {HEADER(y, d)}
+    {DIVIDER}
       Part 1: {part_a}
       Part 2: {part_b}
-    {'-' * 34}
+    {DIVIDER}
       Time: {(stop - start) * 100:.6f} ms
     ''')
 
