@@ -73,7 +73,7 @@ def sort_connected_fields(walls):
 
 def solve():
     puzzle = load_input(test=True)
-    garden = convert_to_dict_map(puzzle)
+    garden = text_to_dictmap(puzzle)
     plants = {garden[pos] for pos in garden}
 
     part1 = part2 = 0

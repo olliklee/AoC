@@ -60,7 +60,7 @@ def solve():
   part1 = part2 = 0
   
   puzzle = load_input(day, test=False)
-  maze = convert_to_dict_map(puzzle)
+  maze = text_to_dictmap(puzzle)
   start = next((pos for pos in maze if maze[pos] == 'S'))
   goal = next((pos for pos in maze if maze[pos] == 'E'))
   

@@ -65,7 +65,7 @@ def solve():
     part1 = part2 = 0
 
     puzzle = load_input(test=False)
-    maze = convert_to_dict_map(puzzle)
+    maze = text_to_dictmap(puzzle)
 
     start, finish = get_start_and_finish(maze)
     numerize(maze, start, finish)
