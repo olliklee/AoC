@@ -1,33 +1,13 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
 
-from time import perf_counter
+from aoc_helper import *
 from collections import defaultdict
 
 year, day = "2022", "07"
 
-
-def run(d, y):
-    print(f"\nResults from AoC {y} - Day {d}\n{'-' * 30}")
-
-    start = perf_counter()
-    print(f"Day {d} - Part 1: {solve_a()}")
-
-    lap = perf_counter()
-    print(f"Day {d} - Part 2: {solve_b()}")
-
-    stop = perf_counter()
-
-    print(f"\nPerformance\n{'-' * 30}")
-    print(f"Part 1: {(lap - start) * 100:.6f} ms\nPart 2: {(stop - lap) * 100:.6f} ms")
-    print(f"{'-' * 30}\nGesamt: {(stop - start) * 100:.6f} ms")
-
-
-def prepare_input(file_name):
-    with open(file_name) as f:
-        content = f.read()
-        program = content.split("\n")
-    return program
+fs = dict()
+sizes = defaultdict(int)
 
 
 def make_filesystem(program):
@@ -81,37 +61,18 @@ def get_size(path, sum=0):
 
     return sizes[path]
 
-# The solution
-#
 
-fs = dict()
-sizes = defaultdict(int)
-
-
-def solve_a():
-    program = prepare_input(f"Day{day}_input.txt")
+def solve():
+    program = load_input(split_by_line=True)
     make_filesystem(program)
     get_size("/")
 
-    # sum up every directory with a size > 100.000
-    sumup = 0
-    for _, value in sizes.items():
-        if value <= 100000:
-            sumup += value
+    part1 = sum([value for _, value in sizes.items() if value <= 100000])
 
-    return sumup
-
-
-def solve_b():
     necessary_size = 30000000 - (70000000 - sizes["/"])
+    part2 = sorted([size for size in sizes.values() if size > necessary_size])[0]
 
-    suitable_sizes = []
-    for size in sizes.values():
-        if size > necessary_size:
-            suitable_sizes.append(size)
-
-    suitable_sizes.sort()
-    return suitable_sizes[0]
+    return part1, part2
 
 
-run(day, year)
+run_puzzle(day, year, solve)
