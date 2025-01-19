@@ -1,5 +1,6 @@
 # # #  Solutions of Advent of Code
 # # #  Oliver Kleemann
+# # #  refactored with chatgpt
 
 from aoc_helper import *
 
@@ -49,17 +50,17 @@ def solve():
     
     max_score = max(
         look_direction(x, y, -1, 0) *  # Up
-        look_direction(x, y, 1, 0) *   # Down
-        look_direction(x, y, 0, 1) *   # Right
-        look_direction(x, y, 0, -1)    # Left
+        look_direction(x, y, 1, 0) *  # Down
+        look_direction(x, y, 0, 1) *  # Right
+        look_direction(x, y, 0, -1)  # Left
         for x in range(dim_x) for y in range(dim_y)
     )
-
+    
     part2 = max_score
-
+    
     return part1, part2
 
 
 #  ----------   Start   ----------   #
 
-run_puzzle(day,year,solve)
+run_puzzle(day, year, solve)
