@@ -6,8 +6,7 @@ from aoc_helper import *
 year, day = "2022", "08"
 
 forest = load_input(split_by_line=True)
-dim_x = len(forest[0])
-dim_y = len(forest)
+dim_x, dim_y = len(forest[0]), len(forest)
 
 
 def scan_line(start, end, step, fixed, axis, visible):
@@ -23,32 +22,14 @@ def scan_line(start, end, step, fixed, axis, visible):
 def look_direction(x, y, dx, dy):
     treehouse = int(forest[x][y])
     seen_trees = 0
-    while True:
+    while 0 <= x + dx < dim_x and 0 <= y + dy < dim_y:
         x += dx
         y += dy
-        if x < 0 or x >= dim_x or y < 0 or y >= dim_y:
-            break
         next_tree = int(forest[x][y])
         seen_trees += 1
         if next_tree >= treehouse:
             break
     return seen_trees
-
-
-def look_up(x, y):
-    return look_direction(x, y, -1, 0)
-
-
-def look_down(x, y):
-    return look_direction(x, y, 1, 0)
-
-
-def look_left(x, y):
-    return look_direction(x, y, 0, -1)
-
-
-def look_right(x, y):
-    return look_direction(x, y, 0, 1)
 
 
 def solve():
@@ -66,12 +47,14 @@ def solve():
     
     part1 = len(visible)
     
-    max_score = 0
-    for col in range(dim_x):
-        for row in range(dim_y):
-            score = look_up(col, row) * look_down(col, row) * look_right(col, row) * look_left(col, row)
-            max_score = max(score, max_score)
-    
+    max_score = max(
+        look_direction(x, y, -1, 0) *  # Up
+        look_direction(x, y, 1, 0) *   # Down
+        look_direction(x, y, 0, 1) *   # Right
+        look_direction(x, y, 0, -1)    # Left
+        for x in range(dim_x) for y in range(dim_y)
+    )
+
     part2 = max_score
 
     return part1, part2
