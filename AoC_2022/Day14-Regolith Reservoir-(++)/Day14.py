@@ -6,22 +6,6 @@ from aoc_helper import *
 year, day = "2022", "14"
 
 
-def sand_move(walls, sand, limit, pos=(500, 0)):
-    dirs = [(0, 1), (-1, 1), (1, 1)]
-    if pos in walls or pos in sand or pos[1] > limit:
-        return
-
-    x, y = pos
-    for direction in dirs:
-        dx, dy = direction
-        new_pos = (x + dx, y + dy)
-        if new_pos not in walls and new_pos not in sand:
-            return sand_move(walls, sand, limit, new_pos)
-
-    sand.add(pos)
-    return
-
-
 def create_walls(puzzle):
     walls = set()
     for line in puzzle:
@@ -39,6 +23,22 @@ def create_walls(puzzle):
     return walls
 
 
+def sand_move(walls, sand, limit, pos=(500, 0)):
+    dirs = [(0, 1), (-1, 1), (1, 1)]
+    if pos in walls or pos in sand or pos[1] > limit:
+        return False
+
+    x, y = pos
+    for direction in dirs:
+        dx, dy = direction
+        new_pos = (x + dx, y + dy)
+        if new_pos not in walls and new_pos not in sand:
+            return sand_move(walls, sand, limit, new_pos)
+
+    sand.add(pos)
+    return pos == (500, 0)
+
+
 def solve():
     puzzle = load_input(split_by_line=True)
     walls = create_walls(puzzle)
@@ -47,7 +47,8 @@ def solve():
     # part1
     sand = set()
     for _ in range(1000):
-        sand_move(walls, sand, limit=abyss)
+        if sand_move(walls, sand, limit=abyss):
+            break
     part1 = len(sand)
 
     # part2
@@ -56,7 +57,8 @@ def solve():
         walls.add((x, abyss + 2))
 
     for _ in range(30000):
-        sand_move(walls, sand, limit=abyss + 2)
+        if sand_move(walls, sand, limit=abyss + 2):
+            break
     part2 = len(sand)
 
     return part1, part2
