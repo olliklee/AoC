@@ -10,27 +10,25 @@ year, day = "2022", "11"
 
 
 def prepare_input(puzzle):
+    # monkey_number: [[items], (operator, operand), test, true_monkey, false_monkey]
     monkey_dict = {}
     for monkey in puzzle:
-        split_monkey = [line.split(': ') for line in monkey.split('\n')]
-
-        m_nr = int(split_monkey[0][0].split()[1][:-1])
-        st_items = list(map(int,split_monkey[1][1].split(', ')))
-        operator = split_monkey[2][1].split()[3] if split_monkey[2][1].split()[4] != 'old' else '**'
-        operand = int(split_monkey[2][1].split()[4] if split_monkey[2][1].split()[4] != 'old' else '2')
-        test = int(split_monkey[3][1].split()[2])
-        true = int(split_monkey[4][1].split('monkey ')[1])
-        false = int(split_monkey[5][1].split('monkey ')[1])
-        monkey_dict[m_nr] = [st_items, operator, operand, test, true, false]
-        
+        lines = monkey.split('\n')
+        result = []
+        for i, line in enumerate(lines):
+            match i:
+                case 0 | 3 | 4 | 5: result.append(int(re.findall(r'\d+', line)[0]))
+                case 1: result.append(list(map(int, re.findall(r'(\d+)', line))))
+                case 2: result.extend(re.findall(r'.*(.+) (old|\d+)', line))
+        monkey_dict[result[0]] = result[1:]
     return monkey_dict
 
 
-def get_worry_level(old, op, num):
+def get_worry_level(old, operation):
+    op, num = operation
     match op:
-        case "+": return old + num
-        case "*": return old * num
-        case "**": return old ** num
+        case "+": return old + int(num)
+        case "*": return old * (int(num) if not num == 'old' else old)
         case _: raise ValueError("Invalid operation")
     
 
@@ -38,17 +36,15 @@ def turn(monkey_dict, monkey_num, kgv, divide = True):
     inspects = 0
     while len(monkey_dict[monkey_num][0]) > 0:
         this_item = monkey_dict[monkey_num][0].pop(0)
-        worry = get_worry_level(this_item,
-                                monkey_dict[monkey_num][1],
-                                monkey_dict[monkey_num][2])
+        worry = get_worry_level(this_item, monkey_dict[monkey_num][1])
         worry = worry // (3 if divide else 1)
         if not divide:
             worry %= kgv  # keep number small
         
-        if worry % monkey_dict[monkey_num][3] == 0:
-            throw_to = monkey_dict[monkey_num][4]
+        if worry % monkey_dict[monkey_num][2] == 0:
+            throw_to = monkey_dict[monkey_num][3]
         else:
-            throw_to = monkey_dict[monkey_num][5]
+            throw_to = monkey_dict[monkey_num][4]
             
         monkey_dict[throw_to][0].append(worry)
         inspects += 1
@@ -59,7 +55,7 @@ def turn(monkey_dict, monkey_num, kgv, divide = True):
 def process_turns(puzzle, turns, divide=True):
     inspects = defaultdict(int)
     monkey_dict = prepare_input(puzzle)
-    kgv =  prod([val[3] for val in monkey_dict.values()])
+    kgv =  prod([val[2] for val in monkey_dict.values()])
 
     for _ in range(turns):
         for monkey_nr in monkey_dict.keys():
