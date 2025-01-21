@@ -64,7 +64,7 @@ def process_turns(puzzle, turns, divide=True):
 
 
 def solve():
-    puzzle = load_input(test=False, delimiter='\n\n')
+    puzzle = load_input(delimiter='\n\n')
 
     part1 = process_turns(puzzle, 20)
     part2 = process_turns(puzzle, 10000, divide=False)
