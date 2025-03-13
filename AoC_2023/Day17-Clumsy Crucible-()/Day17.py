@@ -36,7 +36,7 @@ def solve_b():
     # code goes here
     return 0
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input()
 

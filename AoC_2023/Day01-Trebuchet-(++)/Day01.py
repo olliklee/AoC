@@ -2,6 +2,7 @@
 # # #  Oliver Kleemann
 
 from aoc_helper import *
+import re
 
 year, day = "2023", "01"
 
@@ -11,24 +12,13 @@ int_dict = {"one": 1, "two": 2, "three": 3,
             "zero": 0}
 
 
-def prepare_input(file_name):
-    with open(file_name) as f:
-        content = f.read().split("\n")
-
-    return content
-
-
 def translate(text: str):
     new_text = ''
-    # Goes letter by letter through the text string
     for index, letter in enumerate(text):
-        # Letter is a digit? Add the letter to the translation string
-        # skip the rest of the loop
         if letter.isdigit():
             new_text += letter
             continue
-
-        # Goes through all entries of the dict if the following letters matches an entry
+        
         for key in int_dict.keys():
             # Is the given index of the find method == the index from the enumeration?
             # if not just check the next int_dict entry
@@ -37,32 +27,24 @@ def translate(text: str):
                 # and leave the dict iteration to get the next letter in the text string
                 new_text += str(int_dict[key])
                 break
-
+    
     return new_text
 
 
-def solve_a():
-    sum_up = 0
-    unwanted_chars = "abcdefghijklmnopqrstuvwxyz"
-
-    for line in puzzle:
-        # Remove all unnecessary letters from beginning and end
-        new_line = line.strip(unwanted_chars)
-        # first and last characters must now be digits
-        # and can be concatenated, cast to int and added to the final sum
-        sum_up += int(new_line[0] + new_line[-1])
-    return sum_up
-
-
-def solve_b():
+def solve():
+    puzzle = load_input(test=False, split_by_line=True)
+    
+    digits = [re.findall(r"(\d)", line) for line in puzzle]
+    part1 = sum([int(d[0] + d[-1]) for d in digits])
+    
     sum_up = 0
     for line in puzzle:
         new_line = translate(line)
-        # first and last characters must now be digits
-        # and can be concatenated, cast to int and added to the final sum
         sum_up += int(new_line[0] + new_line[-1])
-    return sum_up
+    
+    part2 = sum_up
+    
+    return part1, part2
 
 
-puzzle = load_input(split_by_line=True)
-run_puzzles(day, year, solve_a, solve_b)
+run_puzzle(day, year, solve)

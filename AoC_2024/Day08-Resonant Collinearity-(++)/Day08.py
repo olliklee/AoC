@@ -32,7 +32,7 @@ def get_all_antipodes(point_a, point_b, grid):
 
 def solve():
   content = load_input(test=True)
-  puzzle = convert_to_dict_map(content)
+  puzzle = text_to_dict_map(content)
   
   antennas = defaultdict(list)
   for spot in puzzle:
@@ -68,7 +68,7 @@ def solve():
   return part1, part2
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 run_puzzle(day, year, solve)
 

@@ -56,7 +56,7 @@ def solve_b():
 #     return len(result)
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input()
 

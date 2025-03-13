@@ -44,6 +44,6 @@ def solve():
     return part1, part2
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 run_puzzle(day, year, solve)

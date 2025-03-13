@@ -44,7 +44,7 @@ def solve_b():
     return 0
 
 
-### ----------- Start ------------- ###
+#  ----------   Start   ----------   #
 
 puzzle = prepare_input(filename)
 run_puzzles(day, year, solve_a, solve_b)
