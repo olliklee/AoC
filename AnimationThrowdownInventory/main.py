@@ -1,6 +1,7 @@
 # https://github.com/toddhodes/AnimationThrowdown
 # translated with help of chatgpt
 
+from generate_user_file import generate_user_file
 from read_cards import generate_cards_file
 from read_decks import generate_decks_file
 from generate_cards import print_units_with_levels
@@ -11,20 +12,27 @@ def parse_credentials():
     creds_path = 'data/.at_creds'
     with open(creds_path) as f:
         lines = f.readlines()
-        
+
     user_id = next(line for line in lines if "user_id=" in line).strip().split("=")[1]
     password_hash = next(line for line in lines if "password_hash=" in line).strip().split("=")[1]
-    
+
     return user_id, password_hash
 
 
 def inventory():
+    TEMP_FILE = "temp/user.json"
     user_id, password_hash = parse_credentials()
-    
-    generate_cards_file(user_id, password_hash)
-    generate_decks_file(user_id, password_hash)
-    print_units_with_levels(output_file="output/units-with-stars.txt")
-    print_combo_mastery_table(output_file="output/combo_mastery.txt")
-    
+    # generate_user_file(TEMP_FILE, user_id, password_hash)
+
+    generate_cards_file(TEMP_FILE)
+    # print('1')
+    # generate_decks_file(user_id, password_hash)
+    # print('2')
+    #
+    # print_units_with_levels(output_file="output/units-with-stars.txt")
+    # print_combo_mastery_table(output_file="output/combo_mastery.txt")
+    #
+
+
 if __name__ == '__main__':
     inventory()
