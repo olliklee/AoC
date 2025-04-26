@@ -1,23 +1,14 @@
-import os
 import json
-import requests
 
 
-def generate_decks_file(user_id, password_hash):
+def generate_decks_file(input_file):
     units_out = "output/units-w-levels.txt"
     cm_out = "output/ids-with-cm.txt"
-    
-    url = f"https://cb-live.synapse-games.com/api.php?message=init&user_id={user_id}"
-    response = requests.post(url, data={"password": password_hash})
-    
-    # Save full response to /tmp (optional)
-    with open("/tmp/user.json", "w") as f:
-        f.write(response.text)
-    
-    print("retrieved user.json")
-    
-    # Parse JSON
-    data = response.json()
+
+    # Parse and format card data
+    with open(input_file) as f:
+        data = json.load(f)
+        card_data = data['user_decks']
     
     # Process user_units
     unit_lines = []
