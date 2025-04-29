@@ -1,7 +1,9 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Tuple
-from cards import Card, MyCard
+from classes import Card, MyCard
+
+from consts import USER_FILE_PATH, JS_CARDS, JS_USER_CARDS
 
 
 class CardDataProcessor:
@@ -11,20 +13,20 @@ class CardDataProcessor:
         self.card_catalog: Dict[str, Card] = {}
         self.my_cards: List[MyCard] = []
 
-    def load_card_data(self) -> Dict:
+    def load_cards_data(self) -> Dict:
         """Load and parse JSON card data from input file."""
         with open(self.input_file) as f:
-            return json.load(f)['card_data']
+            return json.load(f)[JS_CARDS]
 
-    def load_my_card_data(self) -> Dict:
+    def load_my_cards_data(self) -> Dict:
         """Load and parse JSON card data from input file."""
         with open(self.input_file) as f:
-            return json.load(f)['user_units']
+            return json.load(f)[JS_USER_CARDS]
 
     def process_cards(self):
         """Process card data and return formatted lines."""
-        card_data = self.load_card_data()
-        my_card_data = self.load_my_card_data()
+        card_data = self.load_cards_data()
+        my_card_data = self.load_my_cards_data()
 
         for card_id, card_info in card_data.items():
             card = Card.from_dict(card_id, card_info)

@@ -1,16 +1,18 @@
 # https://github.com/toddhodes/AnimationThrowdown
 # translated with help of chatgpt
-
+from functions.buy_golden_turd import buy_golden_turd_items
 from generate_user_file import generate_user_file
-from read_cards import generate_cards_db
-from read_decks import generate_decks_file
+from functions.cards_inventory import get_card_inventory
+from classes import CardsDB, MyCardsDB
+# from read_decks import generate_decks_file
 from generate_cards import print_units_with_levels
 from generate_cm import print_combo_mastery_table
 
+from consts import CREDITS_PATH, USER_FILE_PATH
+
 
 def parse_credentials():
-    creds_path = 'data/.at_creds'
-    with open(creds_path) as f:
+    with open(CREDITS_PATH) as f:
         lines = f.readlines()
 
     user_id = next(line for line in lines if "user_id=" in line).strip().split("=")[1]
@@ -20,37 +22,28 @@ def parse_credentials():
 
 
 def inventory():
-    TEMP_FILE = "temp/user.json"
     user_id, password_hash = parse_credentials()
-    # generate_user_file(TEMP_FILE, user_id, password_hash)
+    if input("Regenerate user file? (y/n): ") == "y":
+        generate_user_file(USER_FILE_PATH, user_id, password_hash)
 
-    card_catalog, my_cards = generate_cards_db(TEMP_FILE)
-    # lindas = "\n".join([str(card) for card in card_catalog if card.type == "7" and card.cardtype == 'character'])
-    # print(lindas)
+    # Zuerst CardDB laden
+    cards_db = CardsDB.from_user_file(USER_FILE_PATH)
+    print(f"Cards DB loaded with {len(cards_db.cards)} cards")
 
-    rarity_name = ["C", "R", "E", "L", "M"]
-    my_inventory = {}
-    for card in my_cards:
-        rarity = rarity_name[int(card_catalog[card.unit_id].rarity) - 1]
-        card_name = card_catalog[card.unit_id].name
-        entry = f"{rarity}-{card.level}"
+    # Dann MyCardsDB mit Referenz zur CardDB laden
+    my_cards_db = MyCardsDB.from_user_file(USER_FILE_PATH, cards_db)
+    print(f"My Cards loaded with {len(my_cards_db.cards)} cards")
 
-        if card_name not in my_inventory:
-            my_inventory[card_name] = [entry]
-        else:
-            my_inventory[card_name].append(entry)
-            my_inventory[card_name].sort(reverse=True)
-
-    sorted_dict = dict(sorted(my_inventory.items()))
+    # Inventar ausgeben
+    my_cards_db.print_cards_inventory()
 
 
-    # generate_decks_file(user_id, password_hash)
-    # print('2')
-    #
-    # print_units_with_levels(output_file="output/units-with-stars.txt")
-    # print_combo_mastery_table(output_file="output/combo_mastery.txt")
-    #
+def buy_golden_turd_card(cards_db):
+    user_id, password_hash = parse_credentials()
 
+    if input('Buy a new card with golden Turds (y/n)?') == 'y':
+        new_turd_buy = buy_golden_turd_items(user_id, password_hash, count=1)
+        print(cards_db[new_turd_buy])
 
 if __name__ == '__main__':
     inventory()
