@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
-from consts import JS_CARDS, JS_USER_CARDS
+from consts import JS_CARDS, JS_USER_CARDS, JS_USER_ITEMS, ITEMS_FILE_PATH
 
 
 @dataclass
@@ -149,3 +149,46 @@ class Deck:
             hero_level=deck_info.get('commander', {}).get('level'),
             cards=[MyCard.from_dict(unit.get('card_id', ''), unit) for unit in deck_info.get('units', [])]
         )
+
+@dataclass()
+class UserItem:
+    item_id: str
+    name: str
+    consume: str | None
+    number: str
+
+    @classmethod
+    def from_dict(cls, item_id: str, item_info: Dict) -> 'Item':
+        return cls(
+            item_id=item_id,
+            name=item_info.get('name', '').replace("'", "\'"),
+            consume=item_info.get('consume', None),
+            number=item_info.get('number'),
+        )
+
+    def __str__(self):
+        output = f'ID: {self.item_id:>7}  {self.name:40} Amount: {self.number:6}'
+        output += f' Cost: {self.consume}' if self.consume else ''
+        return output
+
+
+@dataclass()
+class UserItems:
+    items: List[UserItem]
+
+    @classmethod
+    def from_user_file(cls, user_file: str):
+        # Datei öffnen und JSON-Inhalt laden
+        with open(user_file) as f:
+            data = json.load(f)
+            my_items_data = data[JS_USER_ITEMS]  # Konstante für user_cards
+
+        # MyCard Objekte erstellen
+        my_items = [UserItem.from_dict(item_id, item_info) for item_id, item_info in my_items_data.items()]
+
+        return cls(items=my_items)
+
+    def write_items_inventory(self):
+        with open(ITEMS_FILE_PATH, mode='w') as f:
+            for item in self.items:
+                f.write(f'{item}\n')

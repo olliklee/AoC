@@ -25,6 +25,7 @@ def _buy_golden_turd_item(user_id: str, password_hash: str) -> Optional[str]:
 
 
 def buy_golden_turd_items(user_id: str, password_hash: str, count: int = 1):
+
     for i in range(count):
         unit_id = _buy_golden_turd_item(user_id, password_hash)
 

@@ -1,6 +1,7 @@
 # https://github.com/toddhodes/AnimationThrowdown
 # translated with help of chatgpt
 from functions.buy_golden_turd import buy_golden_turd_items
+from functions.items_inventory import get_items_inventory
 from generate_user_file import generate_user_file
 from functions.cards_inventory import get_card_inventory
 from classes import CardsDB, MyCardsDB
@@ -36,6 +37,12 @@ def inventory():
 
     # Inventar ausgeben
     my_cards_db.print_cards_inventory()
+    print(cards_db.cards["40002"])
+
+    if input("\nGenerate item inventory? (y/n): ") == "y":
+        get_items_inventory()
+        print("Item inventory created under output/item_inventory.txt")
+
 
 
 def buy_golden_turd_card(cards_db):
