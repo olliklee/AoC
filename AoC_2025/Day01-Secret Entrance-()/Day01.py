@@ -2,6 +2,7 @@
 # # #  Oliver Kleemann
 
 from aoc_helper import *
+from collections import deque
 
 year, day = "2025", "01"
 
@@ -9,25 +10,24 @@ year, day = "2025", "01"
 def solve():
     part1 = part2 = 0
     puzzle = load_input(test=True, split_by_line=True)
-    position = 50
+    dq = deque(range(100))
+    dq.rotate(50)
 
     for row in puzzle:
         direction = row[0]
-        rotation = int(row[1:])
+        shift = int(row[1:])
 
-        if direction == "L":
-            rotation *= -1
+        if direction == "R":
+            shift *= -1
 
-        position += rotation
+        wraps = abs(shift) // len(dq)
 
-        hits_zero = abs(position // 100)
+        dq.rotate(shift)
+        print(f'{row:6}, {shift:6}, {dq[0]:5}, {wraps:6}')
+        part2 += wraps
 
-        part2 += hits_zero
-        position = position % 100
-
-        if position == 0:
+        if dq[0] ==  0:
             part1 += 1
-
 
 
     return part1, part2
