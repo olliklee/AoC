@@ -11,7 +11,7 @@ def solve():
     puzzle = load_input(test=False, delimiter=",")
     pattern = re.compile(r'^(.+?)\1+$') # repeating patterns
 
-    invalid_ids_part1, invalid_ids_part2  = [], []
+    part1 = part2 = 0
 
     for ranges in puzzle:
         start_id, stop_id = map(int,ranges.split("-"))
@@ -23,15 +23,13 @@ def solve():
 
             # part 1 rule
             half = length // 2
-            if length % 2 == 0 and number_str[:half] == number_str[half:]:
-                invalid_ids_part1.append(number)
+            if length % 2 and number_str[:half] == number_str[half:]:
+                part1 += number
 
             # part 2 rule
-            m = pattern.match(number_str)
-            if m:
-                invalid_ids_part2.append(number)
-
-    part1, part2 = sum(invalid_ids_part1), sum(invalid_ids_part2)
+            matched = pattern.match(number_str)
+            if matched:
+                part2 += number
 
     return part1, part2
 
