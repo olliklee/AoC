@@ -26,16 +26,15 @@ def solve():
     part2 = 0
     intervals.sort()  # sortiert nach start wert des tuples
 
-    # noinspection PyTypeChecker
-    act_start, act_stop = intervals[0]
+    prev_start, prev_stop = intervals[0]
     for start, stop in intervals[1:]:
-        if start <= act_stop + 1:
-            act_stop = max(act_stop, stop)  # bei Überschneidung
+        if start <= prev_stop + 1:
+            prev_stop = max(prev_stop, stop)  # bei Überschneidung
         else:
-            part2 += act_stop - act_start + 1  # länge des intervalls zur gesamtzahl addieren
-            act_start, act_stop = start, stop  # neues intervall starten
+            part2 += prev_stop - prev_start + 1  # länge des intervalls zur gesamtzahl addieren
+            prev_start, prev_stop = start, stop  # neues intervall starten
 
-    part2 += act_stop - act_start + 1  # letztes intervall zur gesamtzahl addieren
+    part2 += prev_stop - prev_start + 1  # letztes intervall noch zur gesamtzahl addieren
 
     return part1, part2
 
