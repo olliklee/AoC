@@ -5,6 +5,7 @@ from aoc_helper import *
 
 year, day = "2016", "01"
 
+
 def solve():
     puzzle = load_input(delimiter=', ')
 

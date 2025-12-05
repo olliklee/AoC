@@ -22,7 +22,9 @@ def init_ingredients():
 
 
 def get_variants(amount):
-    yield (for combination in product(range(100 + 1), repeat=amount) if sum(combination) == 100)
+    for combination in product(range(101), repeat=amount):  # Von 0 bis 100
+        if sum(combination) == 100:
+            yield combination
     
 
 def neighbor(amounts):
@@ -31,7 +33,7 @@ def neighbor(amounts):
     change = random.randint(1, 5)  # Kleiner Schritt für feinere Suche
 
     # Zutat `idx1` verringern und `idx2` erhöhen, solange die Gesamtverteilung gültig bleibt
-    if new_amounts[idx1] >= change:
+    if new_amounts[idx1] >= change and new_amounts[idx2] + change <= 100:
         new_amounts[idx1] -= change
         new_amounts[idx2] += change
 
@@ -39,6 +41,8 @@ def neighbor(amounts):
 
 
 def calc_score(amounts):
+    if not amounts or len(amounts) != len(ing_dict):
+        raise ValueError("Amounts list is empty or does not match ingredients.")
     if sum(amounts) != 100:
         print("Not 100 spoons!")
         return 0, 0
@@ -58,7 +62,7 @@ def calc_score(amounts):
 def solve():
     init_ingredients()
     count = len(ing_dict)
-    amounts = [100// count] * count
+    amounts = [100 // count] * count
     highest_score, _ = calc_score(amounts)
 
     # Teil 1: Höchster Score
