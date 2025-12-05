@@ -1,5 +1,4 @@
 import os
-import AoC_2015
 
 PRE = 'AoC_'
 
@@ -18,7 +17,7 @@ def show_summary(folder):
     print()
 
 if __name__ == '__main__':
-    years = [2015,2016,2021,2022,2023,2024, 2025]
+    years = [2015, 2016, 2017, 2021, 2022, 2023, 2024, 2025]
     for y in years:
         show_summary(f'{PRE}{y}')
     
