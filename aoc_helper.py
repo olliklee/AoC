@@ -9,7 +9,6 @@ DAY = lambda d: d[1:] if d[0] == '0' else d
 HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}'
 
 
-
 def load_input(test=False, split_by_line=False, delimiter='') -> str:
     """ Read main input or test input from this folder.It returns the file as string """
 
