@@ -5,11 +5,17 @@ import heapq
 T = TypeVar("T", int, float, str)
 
 DIVIDER = '-' * 41
-DAY = lambda d: d[1:] if d[0] == '0' else d
-HEADER = lambda y,d: f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}'
 
 
-def load_input(test=False, split_by_line=False, delimiter='') -> str:
+def DAY(d: str) -> str:
+    return d[1:] if d[0] == '0' else d
+
+
+def HEADER(y: str, d: str) -> str:
+    return f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}'
+
+
+def load_input(test=False, split_by_line=False, delimiter=''):
     """ Read main input or test input from this folder.It returns the file as string """
 
     file_name = f"input_.txt" if test else f"input.txt"
