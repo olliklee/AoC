@@ -15,7 +15,7 @@ def HEADER(y: str, d: str) -> str:
     return f'Results from AoC {y} - Day {d}\n      https://adventofcode.com/{y}/day/{DAY(d)}'
 
 
-def load_input(test=False, split_by_line=False, delimiter=''):
+def load_input(test: bool = False, split_by_line: bool = False, delimiter: str = '') -> str | list[str]:
     """ Read main input or test input from this folder.It returns the file as string """
 
     file_name = f"input_.txt" if test else f"input.txt"
