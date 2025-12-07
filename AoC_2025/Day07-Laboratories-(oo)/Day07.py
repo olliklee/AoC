@@ -41,6 +41,9 @@ def solve():
     advance_beam(matrix, new_pos)
 
     # count all splitters who were hit by a beam
+    # ..|..       .|.|.
+    # .|^|. hit   .|^|. failed
+
     for position in splitter:
         x, y = position
         part1 += matrix.get((x, y - 1), '.') == '|'
